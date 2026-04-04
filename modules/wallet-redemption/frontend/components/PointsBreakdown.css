@@ -1,0 +1,148 @@
+/* Points Breakdown Component - Design System Compliant */
+
+.points-breakdown {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.breakdown-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.earned {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.stat-icon.earned .material-icons-round {
+  color: #22c55e;
+  font-size: 28px;
+}
+
+.stat-icon.redeemed {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.stat-icon.redeemed .material-icons-round {
+  color: #f59e0b;
+  font-size: 28px;
+}
+
+.stat-icon.remaining {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.stat-icon.remaining .material-icons-round {
+  color: #6366f1;
+  font-size: 28px;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.breakdown-chart {
+  padding-top: 24px;
+  border-top: 1px solid #1f2937;
+}
+
+.chart-label {
+  margin-bottom: 8px;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 300ms ease-out;
+}
+
+.progress-segment.earned {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.progress-segment.redeemed {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.progress-legend {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.legend-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-indicator.earned {
+  background: #22c55e;
+}
+
+.legend-indicator.redeemed {
+  background: #f59e0b;
+}
+
+@media (max-width: 768px) {
+  .breakdown-stats {
+    grid-template-columns: 1fr;
+  }
+}

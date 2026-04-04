@@ -1,0 +1,100 @@
+/* Wallet Card Component - Design System Compliant */
+
+.wallet-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.wallet-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.wallet-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wallet-card-header .material-icons-round {
+  font-size: 28px;
+  color: #6366f1;
+}
+
+.wallet-card-header .section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.wallet-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wallet-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.wallet-amount {
+  font-size: 28px;
+  font-weight: 600;
+  color: #6366f1;
+  line-height: 1.2;
+}
+
+.wallet-card-footer {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #1f2937;
+}
+
+.wallet-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wallet-stat .stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.wallet-stat .stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.wallet-divider {
+  width: 1px;
+  background: #1f2937;
+}
+
+@media (max-width: 768px) {
+  .wallet-amount {
+    font-size: 24px;
+  }
+
+  .wallet-card-footer {
+    gap: 8px;
+  }
+}

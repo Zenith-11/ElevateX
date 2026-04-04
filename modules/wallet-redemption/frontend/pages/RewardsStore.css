@@ -1,0 +1,246 @@
+/* Rewards Store Page - Design System Compliant */
+
+.rewards-balance-card {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+}
+
+@media (max-width: 768px) {
+  .rewards-balance-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.balance-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.balance-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+}
+
+.balance-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #6366f1;
+  line-height: 1.2;
+}
+
+.balance-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Filters */
+.rewards-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  color: #f9fafb;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-btn:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+}
+
+.filter-btn.active {
+  background: #6366f1;
+  color: #ffffff;
+  border-color: #6366f1;
+}
+
+.filter-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Rewards Grid */
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.reward-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 150ms ease-in-out;
+}
+
+.reward-card:hover:not(.reward-locked) {
+  transform: translateY(-2px);
+  border-color: #6366f1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.reward-locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reward-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.reward-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reward-icon .material-icons-round {
+  font-size: 24px;
+  color: #6366f1;
+}
+
+.reward-stock-warn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #f59e0b;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reward-stock-out {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reward-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.reward-desc {
+  font-size: 14px;
+  color: #9ca3af;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.reward-category {
+  margin: 4px 0;
+}
+
+.reward-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #1f2937;
+}
+
+.reward-cost {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #f59e0b;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reward-cost .material-icons-round {
+  font-size: 18px;
+}
+
+/* Pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.pagination-controls button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  color: #f9fafb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.pagination-controls button:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+}
+
+@media (max-width: 768px) {
+  .rewards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+}

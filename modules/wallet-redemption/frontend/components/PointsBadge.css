@@ -1,0 +1,48 @@
+/* Points Badge Component - Design System Compliant */
+
+.points-badge {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #6366f1;
+  font-size: 14px;
+  transition: all 150ms ease-in-out;
+}
+
+.points-badge:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+  transform: scale(1.02);
+}
+
+.points-badge .material-icons-round {
+  font-size: 18px;
+}
+
+.points-value {
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.points-badge-small {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.points-badge-small .material-icons-round {
+  font-size: 14px;
+}
+
+.points-badge-large {
+  padding: 10px 16px;
+  font-size: 16px;
+}
+
+.points-badge-large .material-icons-round {
+  font-size: 20px;
+}
