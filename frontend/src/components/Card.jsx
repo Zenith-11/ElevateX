@@ -1,6 +1,8 @@
-export default function Card({ children }) {
+export default function Card({ children, className = "" }) {
   return (
-   <div className="bg-surface border border-border rounded-xl p-6 transition hover:border-primary">
+    <div
+      className={`rounded-xl border border-edge bg-surface p-6 transition-all duration-200 ${className}`}
+    >
       {children}
     </div>
   );

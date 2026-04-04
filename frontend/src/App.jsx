@@ -1,30 +1,33 @@
 import { useState } from "react";
-import Submit from "./pages/submit";
-import Submissions from "./pages/submission";
+import Submit from "./pages/Submit";
+import Submissions from "./pages/Submission";
 import Review from "./pages/Review";
 import Navbar from "./components/Navbar";
-//import Review from "./pages/Review";
-//import Review from "./pages/Review";
-//import Submissions from "./pages/submission";
-//import Submit from "./pages/submit";
 
 function App() {
   const [page, setPage] = useState("submit");
 
   const renderPage = () => {
-    if (page === "submit") return <Submit/>;
-    if (page === "submissions") return <Submissions/>;
-    if (page === "review") return <Review/>;
+    switch (page) {
+      case "submit":
+        return <Submit />;
+      case "submissions":
+        return <Submissions />;
+      case "review":
+        return <Review />;
+      default:
+        return <Submit />;
+    }
   };
 
   return (
-    <div className="bg-background min-h-screen text-textPrimary">
-      <Navbar setPage={setPage} />
-      <div className="max-w-[1200px] mx-auto p-6">
+    <div className="min-h-screen bg-background text-content">
+      <Navbar setPage={setPage} currentPage={page} />
+      <main className="mx-auto max-w-[1200px] px-6 py-8">
         {renderPage()}
-      </div>
+      </main>
     </div>
-  );; // switch pages manually for demo
+  );
 }
 
 export default App;
