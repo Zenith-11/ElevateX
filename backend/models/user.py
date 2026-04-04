@@ -73,6 +73,12 @@ class Token(BaseModel):
     token_type: str = "bearer"
 
 
+class AccessTokenResponse(BaseModel):
+    """JSON response body — only the access token. Refresh token lives in an HTTP-only cookie."""
+    access_token: str
+    token_type: str = "bearer"
+
+
 class TokenData(BaseModel):
     user_id: str
     role: str
