@@ -36,10 +36,9 @@ async def create_indexes():
             "Please remove duplicate documents and restart."
         )
 
-    # Index on role for admin queries that filter by role
     await db.users.create_index("role")
 
-    # TTL index on blacklisted tokens — MongoDB auto-deletes expired entries
+    # index on blacklisted tokens — for auto-deleting expired entries
     await db.blacklisted_tokens.create_index(
         "expires_at",
         expireAfterSeconds=0,

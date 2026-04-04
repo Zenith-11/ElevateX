@@ -7,7 +7,6 @@ from services.user_services import UserService
 from db import get_db
 from models.user import UserRole
 
-# HTTP Bearer scheme — extracts token from "Authorization: Bearer <token>" header
 security_scheme = HTTPBearer()
 
 
@@ -31,7 +30,7 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    # Must be an access token (not a refresh token)
+
     if payload.get("type") != "access":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

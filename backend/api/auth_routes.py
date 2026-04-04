@@ -36,11 +36,11 @@ def _set_refresh_cookie(response: Response, refresh_token: str):
     response.set_cookie(
         key=REFRESH_COOKIE_NAME,
         value=refresh_token,
-        httponly=True,            # JS cannot read this
-        secure=False,             # Set to True in production (requires HTTPS)
-        samesite="lax",           # Sent on same-site navigation
+        httponly=True,            
+        secure=False,             
+        samesite="lax",           
         max_age=REFRESH_MAX_AGE,
-        path="/api/auth",         # Only sent to auth endpoints
+        path="/api/auth",         
     )
 
 
