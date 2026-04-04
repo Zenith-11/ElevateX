@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { authApi } from '../lib/authApi';
+import { setAccessToken, clearAccessToken } from '../lib/api';
 
 const AuthContext = createContext(null);
 
@@ -9,20 +10,19 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
-  // Fetch current user on mount if token exists
-  const fetchUser = useCallback(async () => {
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-      setIsLoading(false);
-      return;
-    }
-
+  // On mount: try to restore session via silent refresh (cookie is sent automatically)
+  const initializeAuth = useCallback(async () => {
     try {
-      const { data } = await authApi.getMe();
-      setUser(data);
+      // Try to get a new access token using the refresh cookie
+      const { data: tokenData } = await authApi.refreshToken();
+      setAccessToken(tokenData.access_token);
+
+      // Now fetch user profile with the fresh access token
+      const { data: userData } = await authApi.getMe();
+      setUser(userData);
     } catch {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      // No valid refresh cookie → user is not logged in
+      clearAccessToken();
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -30,14 +30,14 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    initializeAuth();
+  }, [initializeAuth]);
 
   const login = async (email, password) => {
     const { data } = await authApi.login(email, password);
-    localStorage.setItem('access_token', data.access_token);
-    localStorage.setItem('refresh_token', data.refresh_token);
-    // Fetch user profile after login
+    // Backend set the refresh cookie; store access token in memory
+    setAccessToken(data.access_token);
+    // Fetch user profile
     const { data: userData } = await authApi.getMe();
     setUser(userData);
     return userData;
@@ -45,8 +45,8 @@ export function AuthProvider({ children }) {
 
   const register = async (formData) => {
     const { data } = await authApi.register(formData);
-    localStorage.setItem('access_token', data.access_token);
-    localStorage.setItem('refresh_token', data.refresh_token);
+    // Backend set the refresh cookie; store access token in memory
+    setAccessToken(data.access_token);
     const { data: userData } = await authApi.getMe();
     setUser(userData);
     return userData;
@@ -58,8 +58,7 @@ export function AuthProvider({ children }) {
     } catch {
       // Even if logout API fails, clear local state
     }
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    clearAccessToken();
     setUser(null);
   };
 

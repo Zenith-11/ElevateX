@@ -2,27 +2,43 @@ import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
+// ───────── In-memory access token (never persisted to storage) ─────────
+
+let accessToken = null;
+
+export const setAccessToken = (token) => {
+  accessToken = token;
+};
+
+export const getAccessToken = () => accessToken;
+
+export const clearAccessToken = () => {
+  accessToken = null;
+};
+
+// ───────── Axios instance ─────────
+
 const api = axios.create({
   baseURL: API_BASE,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Send HTTP-only cookies with every request
 });
 
-// ───────── Request interceptor: attach access token ─────────
+// ───────── Request interceptor: attach in-memory access token ─────────
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// ───────── Response interceptor: handle 401 + token refresh ─────────
+// ───────── Response interceptor: handle 401 + silent refresh ─────────
 
 let isRefreshing = false;
 let failedQueue = [];
@@ -65,29 +81,16 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       isRefreshing = true;
 
-      const refreshToken = localStorage.getItem('refresh_token');
-      if (!refreshToken) {
-        isRefreshing = false;
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        window.location.href = '/login';
-        return Promise.reject(error);
-      }
-
       try {
+        // The refresh token cookie is sent automatically (withCredentials: true)
         const { data } = await axios.post(
           `${API_BASE}/api/auth/refresh-token`,
           {},
-          {
-            headers: {
-              Authorization: `Bearer ${refreshToken}`,
-              'Content-Type': 'application/json',
-            },
-          }
+          { withCredentials: true }
         );
 
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
+        // Store new access token in memory
+        setAccessToken(data.access_token);
 
         processQueue(null, data.access_token);
 
@@ -95,8 +98,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError, null);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        clearAccessToken();
         window.location.href = '/login';
         return Promise.reject(refreshError);
       } finally {
