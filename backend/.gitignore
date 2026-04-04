@@ -1,0 +1,101 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env.*
+!.env.example
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+
+# Type checkers
+.mypy_cache/
+.pyre/
+.pytype/
+
+# FastAPI / Uvicorn
+*.log
+
+# SQLite database (if used locally)
+*.sqlite3
+*.db
+
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Docker (optional)
+docker-compose.override.yml
+
+# Node (if frontend inside same repo)
+node_modules/
+dist/
+
+
+_cleanup.py
+_test_api.py
+_test_results.txt
+_check_indexes.py
