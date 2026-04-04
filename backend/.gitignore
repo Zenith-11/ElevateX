@@ -93,3 +93,9 @@ docker-compose.override.yml
 # Node (if frontend inside same repo)
 node_modules/
 dist/
+
+
+_cleanup.py
+_test_api.py
+_test_results.txt
+_check_indexes.py
