@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from db import connect_to_mongo, close_mongo_connection, create_indexes
 from core.config import settings
@@ -18,6 +19,15 @@ app = FastAPI(
     lifespan=lifespan,
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
+)
+
+# ───────────── CORS (required for HTTP-only cookies) ─────────────
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Vite dev server
+    allow_credentials=True,                   # Allow cookies
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ───────────── Routers ─────────────
